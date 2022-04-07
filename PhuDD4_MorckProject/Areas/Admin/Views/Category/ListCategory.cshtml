@@ -1,0 +1,48 @@
+﻿@model List<PhuDD4_MorckProject.Models.category>
+@{
+    ViewBag.Title = "ListCategory";
+    Layout = "~/Areas/Admin/Views/Shared/Layout/Admin_Layout.cshtml";
+}
+
+
+<div class="tieude">
+    Category
+</div>
+<a href="@Url.Action("createCategory","Category")" class="tao_sp">
+    <button type="button" class="btn_creat btn btn-primary">
+        Create
+        <i class="fa-solid fa-circle-plus"></i>
+    </button>
+</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Date</th>
+            <th class="_handle" scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="@item.category_id.ToString().Trim()">
+                <th scope="row">@item.category_id</th>
+                <td>@item.category_name</td>
+                <td>@item.CREATE_date</td>
+                <td class="handle">
+
+                    <a class="link_sua" href="/Admin/category/update/@item.category_id">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                    <i onclick="xoa_category('@item.category_id.ToString().Trim()','@item.category_name.ToString().Trim()')" class="fa-solid fa-trash"></i>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section script
+    {
+    <script src="~/Areas/Admin/Public/js/admin_category.js"></script>
+}

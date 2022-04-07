@@ -1,0 +1,72 @@
+﻿@model List<PhuDD4_MorckProject.Models.product>
+@{
+    ViewBag.Title = "Danh Sách Sản Phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/Layout/Admin_Layout.cshtml";
+}
+
+<div class="tieude">
+    Product
+</div>
+<a href="@Url.Action("createProduct","product")" class="tao_sp">
+    <button type="button" class="btn_creat btn btn-primary">
+        Create
+        <i class="fa-solid fa-circle-plus"></i>
+    </button>
+
+</a>
+<table class="table">
+    <thead>
+        <tr class="cac_cot">
+            <th scope="col">ID</th>
+            <th scope="col">Tên Sản Phẩm</th>
+            <th scope="col">Danh Mục</th>
+            <th scope="col">Giá</th>
+            <th scope="col">Số Lượng</th>
+            <th scope="col">Xuất Xứ</th>
+            <th scope="col">Thương Hiệu</th>
+            <th scope="col">Ngày Tạo</th>
+            <th scope="col">Ảnh</th>
+            <th class="_handle" scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (PhuDD4_MorckProject.Models.product item in Model)
+        {
+            <tr id="@item.product_id.ToString().Trim()" class="cac_dong">
+                <th class="__hang" scope="row">@item.product_id</th>
+                <td class="__hang">@item.product_name</td>
+                @foreach (PhuDD4_MorckProject.Models.category category in ViewBag.list_category)
+                {
+                    if (category.category_id == item.category_id)
+                    {
+                        <td class="__hang">@category.category_name</td>
+
+                    }
+                }
+
+                <td class="__hang">@item.product_price</td>
+                <td class="__hang">@item.number</td>
+                <td class="__hang">@item.origin</td>
+                <td class="__hang">@item.trademark</td>
+                <td class="__hang">@item.CREATE_date.ToString().Split(' ')[0]</td>
+                <td class="chua_anh">
+                    <div class="khoi_chua_anh">
+                        <img class="_anh" src="~/Public/img/img_product/@item.product_img" />
+                        <img class="_anh_hien" src="~/Public/img/img_product/@item.product_img" />
+                    </div>
+                </td>
+
+                <td class="handle">
+                    <div class="icon_handle">
+                        <a class="fix_the_a" href="/Admin/Product/UpdateProduct/@item.product_id"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <i onclick="xoa_product('@item.product_id.ToString().Trim()', '@item.product_name.Trim()')" class="fa-solid fa-trash"></i>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section script
+{
+    <script src="~/Areas/Admin/Public/js/admin_product.js"></script>
+}

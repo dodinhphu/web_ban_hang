@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MockProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="cart">
+    <Key>
+      <PropertyRef Name="cart_id" />
+      <PropertyRef Name="product_id" />
+    </Key>
+    <Property Name="cart_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="product_id" Type="Int32" Nullable="false" />
+    <Property Name="product_number" Type="Int32" />
+    <NavigationProperty Name="customer" Relationship="Self.FK__cart__cart_id__5070F446" FromRole="cart" ToRole="customer" />
+    <NavigationProperty Name="product" Relationship="Self.FK__cart__product_id__4F7CD00D" FromRole="cart" ToRole="product" />
+  </EntityType>
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="category_id" />
+    </Key>
+    <Property Name="category_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="category_name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="CREATE_date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="products" Relationship="Self.FK__product__categor__2A4B4B5E" FromRole="category" ToRole="product" />
+  </EntityType>
+  <EntityType Name="customer">
+    <Key>
+      <PropertyRef Name="username" />
+    </Key>
+    <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="first_name" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <Property Name="last_name" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="dayofbirth" Type="DateTime" Precision="0" />
+    <Property Name="number_phone" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="permission" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="carts" Relationship="Self.FK__cart__cart_id__5070F446" FromRole="customer" ToRole="cart" />
+    <NavigationProperty Name="don_dat_hang" Relationship="Self.FK__don_dat_h__custo__534D60F1" FromRole="customer" ToRole="don_dat_hang" />
+  </EntityType>
+  <EntityType Name="don_dat_hang">
+    <Key>
+      <PropertyRef Name="order_id" />
+    </Key>
+    <Property Name="order_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customer_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="customer_name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="customer_address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="customer_phone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="date_order" Type="DateTime" Precision="0" />
+    <Property Name="total_price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="status" Type="Boolean" />
+    <NavigationProperty Name="customer" Relationship="Self.FK__don_dat_h__custo__534D60F1" FromRole="don_dat_hang" ToRole="customer" />
+    <NavigationProperty Name="don_hang_chitiet" Relationship="Self.FK__don_hang___order__60A75C0F" FromRole="don_dat_hang" ToRole="don_hang_chitiet" />
+  </EntityType>
+  <EntityType Name="don_hang_chitiet">
+    <Key>
+      <PropertyRef Name="order_id" />
+      <PropertyRef Name="product_id" />
+    </Key>
+    <Property Name="order_id" Type="Int32" Nullable="false" />
+    <Property Name="product_id" Type="Int32" Nullable="false" />
+    <Property Name="product_name" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="product_number" Type="Int32" />
+    <Property Name="product_dongia" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="don_dat_hang" Relationship="Self.FK__don_hang___order__60A75C0F" FromRole="don_hang_chitiet" ToRole="don_dat_hang" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="product_id" />
+    </Key>
+    <Property Name="product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="product_name" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="category_id" Type="Int32" />
+    <Property Name="CREATE_date" Type="DateTime" Precision="0" />
+    <Property Name="product_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="product_short_description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="product_img" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="product_price" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="number" Type="Int32" />
+    <Property Name="origin" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="trademark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="carts" Relationship="Self.FK__cart__product_id__4F7CD00D" FromRole="product" ToRole="cart" />
+    <NavigationProperty Name="category" Relationship="Self.FK__product__categor__2A4B4B5E" FromRole="product" ToRole="category" />
+  </EntityType>
+  <Association Name="FK__cart__cart_id__5070F446">
+    <End Role="customer" Type="Self.customer" Multiplicity="1" />
+    <End Role="cart" Type="Self.cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="cart">
+        <PropertyRef Name="cart_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cart__product_id__4F7CD00D">
+    <End Role="product" Type="Self.product" Multiplicity="1" />
+    <End Role="cart" Type="Self.cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="cart">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product__categor__2A4B4B5E">
+    <End Role="category" Type="Self.category" Multiplicity="0..1" />
+    <End Role="product" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="category_id" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__don_dat_h__custo__534D60F1">
+    <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+    <End Role="don_dat_hang" Type="Self.don_dat_hang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="don_dat_hang">
+        <PropertyRef Name="customer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__don_hang___order__60A75C0F">
+    <End Role="don_dat_hang" Type="Self.don_dat_hang" Multiplicity="1" />
+    <End Role="don_hang_chitiet" Type="Self.don_hang_chitiet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="don_dat_hang">
+        <PropertyRef Name="order_id" />
+      </Principal>
+      <Dependent Role="don_hang_chitiet">
+        <PropertyRef Name="order_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MockProjectEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="carts" EntityType="Self.cart" />
+    <EntitySet Name="categories" EntityType="Self.category" />
+    <EntitySet Name="customers" EntityType="Self.customer" />
+    <EntitySet Name="don_dat_hang" EntityType="Self.don_dat_hang" />
+    <EntitySet Name="don_hang_chitiet" EntityType="Self.don_hang_chitiet" />
+    <EntitySet Name="products" EntityType="Self.product" />
+    <AssociationSet Name="FK__cart__cart_id__5070F446" Association="Self.FK__cart__cart_id__5070F446">
+      <End Role="customer" EntitySet="customers" />
+      <End Role="cart" EntitySet="carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cart__product_id__4F7CD00D" Association="Self.FK__cart__product_id__4F7CD00D">
+      <End Role="product" EntitySet="products" />
+      <End Role="cart" EntitySet="carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product__categor__2A4B4B5E" Association="Self.FK__product__categor__2A4B4B5E">
+      <End Role="category" EntitySet="categories" />
+      <End Role="product" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__don_dat_h__custo__534D60F1" Association="Self.FK__don_dat_h__custo__534D60F1">
+      <End Role="customer" EntitySet="customers" />
+      <End Role="don_dat_hang" EntitySet="don_dat_hang" />
+    </AssociationSet>
+    <AssociationSet Name="FK__don_hang___order__60A75C0F" Association="Self.FK__don_hang___order__60A75C0F">
+      <End Role="don_dat_hang" EntitySet="don_dat_hang" />
+      <End Role="don_hang_chitiet" EntitySet="don_hang_chitiet" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

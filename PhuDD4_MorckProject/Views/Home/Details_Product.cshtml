@@ -1,0 +1,115 @@
+﻿@model  PhuDD4_MorckProject.Models.product
+@{
+    ViewBag.Title = "Details_Product";
+    Layout = "~/Views/Shared/MyLayout/Home_Layout.cshtml";
+}
+
+<div style="position:relative" class="all_sp_chitiet">
+    <div class="toan_bo_hien_thi_sp">
+        <div class="grid_colum_4">
+            <div class="anh_sp_chitiet" style="background-image: url(/Public//img//img_product/@Model.product_img);"></div>
+        </div>
+        <div class="grid_colum_sp_6">
+            <h2 class="ten_sp_chitiet">
+                @Model.product_name
+            </h2>
+            <div class="Khung_gia">
+                <h1 class="gia_sp_chiTiet">@int.Parse(@Model.product_price.ToString()).ToString("0,0")đ</h1>
+            </div>
+            <div class="khung_van_chuyen">
+                <span class="txt_van_chuyen">Vận Chuyển</span>
+                <ul class="list_chuc_nang_vc">
+                    <li class="chuc_nang_vc">
+                        <i class="icon_vanchuyen fab fa-freebsd"></i>
+                        Miễn Phí Vận Chuyển
+                    </li>
+                    <li class="chuc_nang_vc">
+                        <i class="icon_vanchuyen fas fa-shipping-fast"></i>
+                        Vận Chuyển Mọi Nơi, Nhanh Chóng, An Toàn
+                    </li>
+                    <li class="chuc_nang_vc">
+                        <i class="icon_vanchuyen fas fa-people-carry"></i>
+                        Nhân Viên Nhiệt Tình, Có Trách Nhiệm
+                    </li>
+                </ul>
+            </div>
+            <div class="khung_sl_ctsp">
+                <span class="txt_sl_ctsp">Số Lượng</span>
+                <input min="1" max="@Model.number" value="1" type="number" class="sl_sp_mua" ID="txt_soluong">
+            </div>
+            <div class="btn_chuc_nang">
+                @using PhuDD4_MorckProject.Models;
+                @if (@Session["customer"] != null)
+                {
+                    var customer = (customer)@Session["customer"];
+                    <button id="nut_themvaogio" onclick="themvaogiohang('@customer.username','@Model.product_id')" class="btn_ctsp Them">
+                        <i class="icon_btn fas fa-cart-plus"></i>
+                        Thêm Vào Giỏ Hàng
+                    </button>
+                }
+                else
+                {
+                    <a href="/authentication/login" class="btn_ctsp Them">
+                        <i class="icon_btn fas fa-cart-plus"></i>
+                        Thêm Vào Giỏ Hàng
+                    </a>
+                }
+            </div>
+            <div class="tt_bao_hanh">
+                <div class="cot_bao_hanh">
+                    <i class="icon_baohanh fas fa-undo-alt"></i>
+                    <span class="txt_baoHanh">
+                        7 ngày miễn phí trả hàng
+                    </span>
+                </div>
+                <div class="cot_bao_hanh">
+                    <i class="icon_baohanh fas fa-user-shield"></i>
+                    <span class="txt_baoHanh">
+                        Hàng chính hãng 100%
+                    </span>
+                </div>
+                <div class="cot_bao_hanh">
+                    <i class="icon_baohanh fas fa-user-check"></i>
+                    <span class="txt_baoHanh">
+                        Kiểm Tra Hàng Trước Khi Thanh Toán
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="mo_ta_sp">
+        <h2 class="txt_mota">Mô Tả Sản Phẩm</h2>
+        <div class="noi_dung_mota">
+            <p class="txt_noi_dung_mota">
+                @Model.product_description
+            </p>
+        </div>
+    </div>
+</div>
+<div id="tongtbt_tc">
+    <div class="tb_themcart alert alert-success align-items-center" role="alert">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="success:">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+        </svg>
+        <div id="tb_them_cardtc">
+
+        </div>
+    </div>
+</div>
+<div id="tongtbt_tb">
+    <div class="tb_themcart alert alert-danger align-items-center" role="alert">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+        </svg>
+        <div id="tb_them_cardtb">
+
+        </div>
+    </div>
+</div>
+@section script
+{
+    <script src="~/Public/js/cart.js"></script>
+}
+

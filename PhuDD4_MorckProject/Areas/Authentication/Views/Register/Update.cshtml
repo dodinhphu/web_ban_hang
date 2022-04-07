@@ -1,0 +1,103 @@
+﻿@model PhuDD4_MorckProject.Models.customer
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/Public/icon/icon_code_web/fontawesome-free-5.15.3-web/css/all.min.css" rel="stylesheet" />
+    <link href="~/Public/css/css_dang_nhap.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Update</title>
+</head>
+<body>
+    <div id="form1" runat="server">
+        <div class="app">
+            <div class="backgroud" style="background: url(/Public/img/main-background1.jpg)">
+                <div class="form" style="width: 580px">
+                    <a class="trovetrangchu" href="../../"><i class="fas fa-home"></i></a>
+                    <div class="tieude" style="height:50px">
+
+                        <h1>Cập Nhật Tài Khoản</h1>
+                    </div>
+                    @using PhuDD4_MorckProject.Models;
+                    @{
+
+                        customer customer = (customer)Session["customer"];
+                    }
+                    <form id="form_dk">
+
+                        <div style="display:none;position:relative" class="tai_khoan">
+                            <i class="icon fas fa-user"></i>
+                            <input value="@customer.username" readonly onclick="an()" name="username" placeholder="UserName" class="txt" ID="txt_username" runat="server" />
+
+                        </div>
+
+                        <div style="position:relative" class="tai_khoan">
+                            <i class="icon fas fa-lock"></i>
+                            <input onclick="an()" name="password" placeholder="Mật Khẩu Mới" type="password" class="txt" ID="txt_password" runat="server" />
+
+                        </div>
+
+
+                        <div style="position:relative" class="tai_khoan">
+                            <i class="icon fas fa-lock"></i>
+                            <input onclick="an()" name="nhaplai" placeholder="Nhập Lại Mật Khẩu Mới" type="password" class="txt" ID="txt_password_kt" runat="server" />
+
+                        </div>
+
+                        <div style="position:relative" class="tai_khoan">
+                            <i class="icon fas fa-user-edit"></i>
+                            <input value="@customer.last_name" onclick="an()" name="ho" placeholder="Họ Và Tên Lót" class="txt" ID="txt_lastname" runat="server" />
+
+                        </div>
+
+                        <div style="position:relative" class="tai_khoan">
+                            <i class="icon fas fa-user-edit"></i>
+                            <input value="@customer.first_name" onclick="an()" name="ten" placeholder="Tên" class="txt" ID="txt_firstname" runat="server" />
+
+                        </div>
+
+                        <div style="position:relative" class="tai_khoan">
+                            <i class="icon fas fa-map-marked"></i>
+                            <input value="@customer.address" onclick="an()" name="diachi" placeholder="Địa chỉ" class="txt" ID="txt_address" runat="server" />
+
+                        </div>
+
+                        <div style="position:relative" class="tai_khoan">
+                            <i class="icon fas fa-birthday-cake"></i>
+                            @{ 
+                                string fullngay = customer.dayofbirth.ToString().Split(' ')[0].Trim();
+                                string[] a = fullngay.Split('/');
+                                string dung = a[2] + "-" + a[1] + "-" + a[0];
+
+                            }
+                            <input value="@dung" onclick="an()" name="ngaysinh" type="date" class="txt" ID="txt_dayofbirth" runat="server" />
+
+                        </div>
+
+                        <div style="position:relative" class="tai_khoan">
+                            <i class="icon fas fa-mobile-alt"></i>
+                            @{ 
+                                string phone = "0" + @customer.number_phone;
+                            }
+                            <input value="@phone" onclick="an()" name="dienthoai" placeholder="Số Điện Thoại" class="txt" ID="txt_numberphone" type="number" />
+
+                        </div>
+                        <div id="tb_tong" style="text-align: end;margin-right: 8px;font-size: 18px"></div>
+                        <div class="btn_dangNhap">
+                            <a href="~/"><button style="text-decoration:none;color:red;width:160px" type="button" class="btn_dang_nhap_admin" ID="bt_huy">Hủy</button></a>
+                            <button type="submit" class="btn_dang_nhap_admin" ID="btn_capnhat">Cập Nhật</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Public/Bootrap Jquery/Jquery/jquery.js"></script>
+    <script src="~/Public/Bootrap Jquery/Jquery/jquery.validate.js"></script>
+    <script src="~/Areas/Authentication/Public/js/register.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+﻿@model List<PhuDD4_MorckProject.Models.don_hang_chitiet>
+@{
+    ViewBag.Title = "DetailsOrder";
+    Layout = "~/Views/Shared/MyLayout/Home_Layout.cshtml";
+}
+
+
+<div style="font-size:18px;margin:80px 0" ; class="container">
+    <h1 style="text-align:center;margin:20px 0 40px 0;font-size:30px">Chi Tiết Đơn Hàng #@Model[0].order_id</h1>
+    <div class="ds_donhang">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="text-align:center" scope="col">STT</th>
+                    <th style="text-align:center" scope="col">Tên Sản Phẩm</th>
+                    <th style="text-align:center" scope="col">Số Lượng</th>
+                    <th style="text-align:center" scope="col">Đơn Giá</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{int i = 1; }
+                @foreach (var item in Model)
+                {
+                    <tr style="height: 80px; vertical-align: middle; border-bottom: 1px solid #fd5f32;">
+                        <th style="text-align:center" scope="row">@i</th>
+                        <td style="text-align:center"> <a style="color:black;text-decoration:none;" href="~/details/product/@item.product_id">@item.product_name</a> </td>
+                        <td style="text-align:center">@item.product_number</td>
+                        <td style="text-align:center">@int.Parse(@item.product_dongia.ToString()).ToString("0,0") VNĐ</td>
+                    </tr>
+                    i++;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

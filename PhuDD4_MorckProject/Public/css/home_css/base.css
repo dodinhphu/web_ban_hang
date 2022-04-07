@@ -1,0 +1,203 @@
+﻿:root {
+    --mautrang: #fff;
+    --mauden: #000;
+    --mauchu: #333;
+}
+
+* {
+    box-sizing: inherit;
+}
+/* 1 rem bằng 10px, có nghĩa là 1,2ren = 12px */
+html {
+    font-size: 62.5%;
+    line-height: 1.6rem;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+    --height_listmenu: 34px;
+    --height_phandau: 170px;
+    --height_phanlogo-seach-giohang: calc(var(--height_phandau)- var(--height_listmenu));
+    --mauchudao: #f66448;
+}
+/* tương thích thiết bị */
+.grid {
+    width: 1400px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.grid__full-width {
+    width: 100%;
+}
+
+.grid__row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -5px;
+    margin-right: -5px;
+}
+/* test */
+.grid_colum_2 { /* chiều ngang của danh mục */
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 16.6667%;
+}
+
+.grid_colum_2_4 { /* chiều ngang của item */
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 20%;
+}
+
+.grid_colum_sp_10 {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 83.3334%;
+}
+
+.btn {
+    min-width: 124px;
+    height: 34px;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.5rem;
+    padding: 0 12px;
+    outline: none;
+    cursor: pointer;
+    color: var(--mauchu);
+    background-color: var(--mautrang);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.6rem;
+    font-family: 'Roboto', sans-serif;
+}
+/* tạo trỏ xuống trong sắp xếp theo giá */
+.sap_xep_theo_gia { /* mục cha */
+    position: relative;
+    min-width: 200px;
+    height: 34px;
+    padding: 0 12px;
+    border-radius: 4px;
+    background-color: var(--mautrang);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+    /* khi nào hover vào mục cha thì hiện ra mục con */
+    .sap_xep_theo_gia:hover .bo_tro_ss_theo_gia,
+    .sap_xep_theo_gia:hover .cau__noi {
+        display: block;
+    }
+
+.bo_tro_ss_theo_gia { /* muc con */
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 28px;
+    border-radius: 4px;
+    background-color: var(--mautrang);
+    padding: 12px 16px;
+    list-style: none;
+    display: none;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+    .bo_tro_ss_theo_gia::before { /*tạo cầu nối giả giữa mục cha và con */
+        content: " ";
+        display: block;
+        width: 100%;
+        left: 0;
+        top: -8px;
+        height: 10px;
+        position: absolute;
+    }
+
+.link_dieu_kien {
+    font-size: 1.5rem;
+    color: var(--mauchu);
+    text-decoration: none;
+    display: block;
+    padding: 12px 0;
+}
+
+    .link_dieu_kien:hover {
+        color: var(--mauchudao);
+    }
+/* thanh chuyển trang */
+.list_trang {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+}
+
+.list_trang_item {
+    margin: 0 16px;
+}
+
+.link_item_trang {
+    --height: 30px;
+    display: block;
+    text-decoration: none;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: #8a8989;
+    min-width: 40px;
+    height: var(--height);
+    text-align: center;
+    line-height: var(--height);
+    border-radius: 2px;
+}
+
+    .link_item_trang:hover {
+        background-color: var(--mauchudao);
+        color: var(--mautrang);
+    }
+
+
+
+/*  chia 4 6 */
+.grid_colum_4 {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 40%;
+}
+
+.grid_colum_sp_6 {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 60%;
+}
+
+/* chia cho giỏ hàng */
+.cot20tren100 {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 20%;
+}
+
+.cot5tren100 {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 5%;
+}
+
+.cot40tren100 {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 40%;
+}
+
+.cot20tren100 {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 20%;
+}
+
+.cot15tren100 {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 15%;
+}

@@ -1,0 +1,271 @@
+﻿
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Home</title>
+    <link href="~/Public/Bootrap Jquery/bootstrap-file/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Public/css/home_css/base.css" rel="stylesheet" />
+    <link href="~/Public/css/home_css/style.css" rel="stylesheet" />
+    <link href="~/Public/icon/icon_code_web/fontawesome-free-5.15.3-web/css/all.min.css" rel="stylesheet" />
+    <!-- forn chữ-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app">
+        <!--  toàn bộ web -->
+        <header class="phan_dau_web">
+            <!-- phần đâu web gồm: phần danh sách menu,khung tim kiếm logo giỏ hàng -->
+            <div class="grid">
+                <nav class="phan_dau_web__phan_menu">
+                    <!-- phần menu của phần đầu gồm 2 thẻ ul chứa 2 danh sách menu  -->
+                    <!-- danh sách bên trái -->
+                    <ul class="phan_dau_web__phan_menu--ds_menu">
+                        <li class="phan_dau_web__phan_menu--ds_menu--item   tao_gach">Vào Cửa Hàng Trên Ứng Dụng</li>
+                        <li class="phan_dau_web__phan_menu--ds_menu--item">
+                            <a class="phan_dau_web-link_menu" href="">
+                                <i class="icon_fb_diagram_thongbaao_hotro far fa-question-circle"></i>
+                            </a>
+                            Trợ Giúp
+                        </li>
+                        <li class="phan_dau_web__phan_menu--ds_menu--item">
+                            <span class="css_ketnoi">Kết Nối</span>
+                            <a class="icon_fb_diagram_thongbaao_hotro" href="#">
+                                <i class="icon_fb_diagram_thongbaao_hotro fab fa-facebook"></i>
+                            </a>
+                            <a class="icon_fb_diagram_thongbaao_hotro" href="#">
+                                <i class="icon_fb_diagram_thongbaao_hotro fab fa-instagram"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- danh sách bên phải -->
+                    <ul class="phan_dau_web__phan_menu--ds_menu">
+                        <!-- dang xuat_ ten user-->
+
+                        @using PhuDD4_MorckProject.Models
+                        @{
+                            var customer = (customer)Session["customer"];
+                          
+                        }
+                        @if (Session["customer"] == null)
+                        {
+                            <li class="phan_dau_web__phan_menu--ds_menu--item  ">
+                                <!-- link use đăng nhập -->
+                                <a class="phan_dau_web-link_menu   chu_dam_dk_dangnhap  tao_gach " href="/Authentication/login">Đăng Nhập</a>
+                            </li>
+                            <!--dang ký -->
+                            <li class="phan_dau_web__phan_menu--ds_menu--item ">
+                                <!-- link use dang ký -->
+                                <a class="phan_dau_web-link_menu   chu_dam_dk_dangnhap" href="/Authentication/register/create">Đăng Ký</a>
+                            </li>
+                        }
+                        else if (customer.permission == 0)
+                        {
+                            <li class="phan_dau_web__phan_menu--ds_menu--item  ">
+                                <!-- link use đăng nhập -->
+                                <a class="phan_dau_web-link_menu chu_dam_dk_dangnhap  tao_gach " href="/Authentication/register/update">Hello @customer.first_name </a>
+                            </li>
+                            <li class="phan_dau_web__phan_menu--ds_menu--item ">
+                                <a href="~/Admin/product/list" class="phan_dau_web-link_menu chu_dam_dk_dangnhap tao_gach" ID="btn_dangxuat">
+                                    Web Manager
+                                </a>
+                            </li>
+                            <!--dang ký -->
+                            <li class="phan_dau_web__phan_menu--ds_menu--item ">
+                                <a href="/authentication/logout" class="phan_dau_web-link_menu chu_dam_dk_dangnhap" ID="btn_dangxuat">
+                                    Đăng Xuất
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="phan_dau_web__phan_menu--ds_menu--item  ">
+                                <!-- link use đăng nhập -->
+                                <a class="phan_dau_web-link_menu chu_dam_dk_dangnhap  tao_gach " href="/Authentication/register/update">Hello @customer.first_name </a>
+                            </li>
+                            <!--dang ký -->
+                            <li class="phan_dau_web__phan_menu--ds_menu--item ">
+                                <a href="/authentication/logout" class="phan_dau_web-link_menu chu_dam_dk_dangnhap" ID="btn_dangxuat">
+                                    Đăng Xuất
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+                </nav>
+
+                <div class="phandau__logo_seach_giohang">
+                    <!-- phần logo , khung tìm kiếm, giỏ hàng -->
+                    <div class="phandau__logo">
+                        <!-- logo -->
+                        <a href="~/"> <img class="logo" src="~/Public/img/logo1.png" alt=""></a>
+                    </div>
+
+                    <div class="phandau__seach">
+                        <!-- phần thanh tìm kiếm -->
+                        <input class="input_seach" ID="txt_ten_sp_timkiem" runat="server" placeholder="Nhập Để Tìm Kiếm" />
+                        <button onclick="timkiem()" id="btn_tim_kiem_sp" class="nut_iconseach">
+                            <i class="icon_seach fas fa-search"></i>
+                        </button>
+                    </div>
+
+                    @if (customer != null)
+                    {
+                        int cout_item_cart = (int)Session["cout_item_cart"];
+                        <div class="phandau__giohang">
+                            <!-- giỏ hàng -->        <!-- link Giỏ Hàng -->
+                            <a style="position:relative" class="link_trang_gioHang" href="@Url.Action("index","GioHang")">
+                                <span id="txt_count_cart" style="font-size:14px;top:-18px !important" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    @cout_item_cart
+                                </span>
+                                <i class="icon_giohang  fas fa-shopping-cart">
+                                </i>
+                            </a>
+                            <a style="margin-left:40px" class="link_trang_gioHang" href="~/listorder"> <i class="icon_giohang fas fa-bars"></i> </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </header>
+
+        <!-- phần slide -->
+        @RenderSection("slide", required: false)
+
+
+        <!-- phần nội dung web -->
+        <div class="noi_dung_web">
+
+            <!-- contern -->
+            <div class="grid">
+                <div class="grid__row all_conten">
+                    <!-- chiều dài  -->
+                    @RenderBody()
+                    <!-- tổng phần nội dung -->
+
+                </div>
+            </div>
+        </div>
+        <footer class="cuoi_web">
+            <!-- phần cuôi web __ footer-->
+            <div class="grid">
+                <div class="grid__row">
+                    <!-- phần  danh sách-->
+                    <div class="grid_colum_2_4">
+                        <h3 class="name_cot_footer">Chăm Sóc Khách Hàng</h3>
+                        <ul class="list_tung_cot_footer">
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Trung Tâm Hổ Trợ</a>
+                            </li>
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Store Mall</a>
+                            </li>
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Hướng Dẩn Mua Hàng</a>
+                            </li>
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Trung Tâm Hổ Trợ</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid_colum_2_4">
+                        <h3 class="name_cot_footer">Giới Thiệu</h3>
+                        <ul class="list_tung_cot_footer">
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Giới Thiệu</a>
+                            </li>
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Tuyển Dụng</a>
+                            </li>
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Điều Khoản</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid_colum_2_4">
+                        <h3 class="name_cot_footer">Mẹo Vặt</h3>
+                        <ul class="list_tung_cot_footer">
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Flash Sales</a>
+                            </li>
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Giao Hàng</a>
+                            </li>
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Kênh Người Bán</a>
+                            </li>
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Chương Trình Tiếp Thị Liên Kết Shopee</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid_colum_2_4">
+                        <h3 class="name_cot_footer">Theo Giõi</h3>
+                        <ul class="list_tung_cot_footer">
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer rieng_cot3" href="">
+                                    <i class="icon_item_footer fab fa-facebook"></i>
+                                    Facebook
+                                </a>
+                            </li>
+                            <li class="list_tung_cot_item ">
+                                <a class="link_item_footer rieng_cot3" href="">
+                                    <i class="icon_item_footer fab fa-instagram-square"></i>
+                                    Instagram
+                                </a>
+                            </li>
+                            <li class="list_tung_cot_item ">
+                                <a class="link_item_footer rieng_cot3" href="">
+                                    <i class="icon_item_footer fab fa-twitter-square"></i>
+                                    Twitter
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid_colum_2_4">
+                        <h3 class="name_cot_footer">Thanh Toán</h3>
+                        <ul class="list_tung_cot_footer">
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Viettel Pay</a>
+                            </li>
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Zalo Pay</a>
+                            </li>
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Shopee Pay</a>
+                            </li>
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">ATM Visa</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="phan_cuoi_cua_footer">
+                <div class="grid">
+                    <div class="grid__row">
+                        <div class="grid_colum_4cot">
+                            <a class="link_cuoi_footer" href="###">CHÍNH SÁCH BẢO MẬT</a>
+                        </div>
+                        <div class="grid_colum_4cot">
+                            <a class="link_cuoi_footer" href="###">QUY CHẾ HOẠT ĐỘNG</a>
+                        </div>
+                        <div class="grid_colum_4cot">
+                            <a class="link_cuoi_footer" href="###">CHÍNH SÁCH VẬN CHUYỂN</a>
+                        </div>
+                        <div class="grid_colum_4cot">
+                            <a class="link_cuoi_footer" href="###">CHÍNH SÁCH TRẢ HÀNG VÀ HOÀN TIỀN</a>
+                        </div>
+                    </div>
+                    <p class="ten_ban_quyen">© 2021 Đình Phú Design. Tất cả các quyền được bảo lưu.</p>
+                </div>
+            </div>
+        </footer>
+        <script src="~/Public/Bootrap Jquery/Jquery/jquery.js"></script>
+        <script src="~/Public/Bootrap Jquery/bootstrap-file/js/bootstrap.min.js"></script>
+        <script src="~/Public/js/javar.js"></script>
+        @RenderSection("script", required: false)
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/Public/icon/icon_code_web/fontawesome-free-5.15.3-web/css/all.min.css" rel="stylesheet" />
+    <link href="~/Public/Bootrap Jquery/bootstrap-file/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Public/css/css_dang_nhap.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div id="form1" runat="server">
+        <div class="app">
+            <div class="backgroud" style="background: url(/Public/img/main-background1.jpg)">
+                <div class="form">
+                    <a class="trovetrangchu" href="../../"><i class="fas fa-home"></i></a>
+                    <div class="tieude">
+
+                        <h1>Đăng Nhập</h1>
+                    </div>
+                    <div class="tai_khoan" style="position:relative">
+                        <i class="icon fas fa-user"></i>
+                        <input onfocus="an()" placeholder="UserName" class="txt" ID="txt_tendangnhap" runat="server" />
+                        <label style="position:absolute;top:42px;right:0" id="tb_username" class="dk_tb"></label>
+                    </div>
+                    <div class="mat_nhau" style="position:relative">
+                        <i class="icon fas fa-lock"></i>
+                        <input type="password" onfocus="an()" placeholder="PassWord" class="txt" ID="txt_matkhau" runat="server" TextMode="Password" />
+                        <label style="position:absolute;top:42px;right:0" id="tb_matkhau" class="dk_tb"></label>
+                    </div>
+                    <div style="display:none; color:red;text-align:end" id="tb_tong"  role="alert">
+                       
+                    </div>
+
+                    <div class="btn_dangNhap">
+                        <button class="btn_dang_nhap_admin" ID="btn_dangnhap" onclick="dangnhap()">Đăng Nhập</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Public/Bootrap Jquery/Jquery/jquery.js"></script>
+    <script src="~/Areas/Authentication/Public/js/login.js"></script>
+</body>
+</html>

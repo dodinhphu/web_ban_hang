@@ -1,0 +1,146 @@
+﻿@model List<PhuDD4_MorckProject.Models.product>
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/MyLayout/Home_Layout.cshtml";
+}
+@section slide
+{
+    <div class="slide_mater_page">
+        <div class="slide">
+            <div class="icon__slide">
+                <i class="icon_icon_trai fas fa-angle-left" onclick="back()"></i>
+                <i class="icon_icon_phai fas fa-angle-right" onclick="next()"></i>
+            </div>
+            <div class="chuyenslide"> <img class="img_slide" src="~/Public/img/Slide/1.jpg" alt="">
+                <img class="img_slide" src="~/Public/img/Slide/2.jpg" alt="">
+                <img class="img_slide" src="~/Public/img/Slide/3.jpg" alt="">
+                <img class="img_slide" src="~/Public/img/Slide/4.jpg" alt="">
+                <img class="img_slide" src="~/Public/img/Slide/5.jpg" alt="">
+            </div>
+        </div>
+    </div>
+}
+
+<div class="grid_colum_2">
+    <!-- danh mục -->
+    <nav class="danh_muc">
+        <h3 class="danh_muc_vs_icon">
+            <i class="icon_danhmuc fas fa-list"></i> <!-- icon danh mục -->
+            Danh Mục
+        </h3>
+        @if (ViewBag.kt_all == "ALL")
+        {
+            <a class="actives txt_tatcasp" href="/home">Tất Cả Sản Phẩm</a>
+        }
+        else
+        {
+            <a class="txt_tatcasp" href="/home">Tất Cả Sản Phẩm</a>
+        }
+
+        <ul class="danh_sach_danh_muc">
+            <!-- danh sách danh mục -->
+            <!-- từng danh mục -->
+
+            @foreach (var category in ViewBag.category)
+            {
+                if (ViewBag.category_id == category.category_id)
+                {
+                    <li class="item_danh_muc">
+                        <a href="/product/category/@category.category_id" class="actives link_item">@category.category_name</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="item_danh_muc">
+                        <a href="/product/category/@category.category_id" class="link_item">@category.category_name</a>
+                    </li>
+                }
+
+            }
+
+
+        </ul>
+    </nav>
+</div>
+
+<div class="grid_colum_sp_10">
+    <div class="home_noidung">
+        <!-- Nội dung__phần tìm kiếm sản phẩm -->
+        <span class="lable_sst">Sắp Xếp Theo</span>
+        <button class="home_noidung__btn btn">Phổ Biến</button>
+        <button class="home_noidung__btn btn">Mới Nhất</button>
+        <button class="home_noidung__btn btn">Bán Chạy</button>
+
+        <div class="sap_xep_theo_gia">
+            <span class="lable_gia">Giá</span>
+            <i class="icon_ss_gia fas fa-angle-down"></i>
+            <!-- xổ xuống khi lia vào -->
+            <ul class="bo_tro_ss_theo_gia">
+                <li class="con_dk_ss">
+                    <a href="/product/ascending" class="link_dieu_kien">Giá: Từ Thấp Đến Cao</a>
+                </li>
+                <li class="con_dk_ss">
+                    <a href="/product/descending" class="link_dieu_kien">Giá: Từ Cao Đến Thấp</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- trang san pham
+        <div class="trang">
+            <span class="so_trang">
+                <span class="so_trang__hien_tai">1</span>/14
+            </span>
+            <div class="chuyen_trang">
+                <a href="" class="nut_chuyen_trang  nut_chuyen_trang--dautien">
+                    <i class="link__chuyen_trang fas fa-angle-left"></i>
+                </a>
+                <a href="" class="nut_chuyen_trang">
+                    <i class="link__chuyen_trang fas fa-angle-right"></i>
+                </a>
+            </div>
+        </div>
+            -->
+    </div>
+    <!--phần load sản phẩm -->
+    <div class="tong_item_sp">
+        <!-- Nội dung__sản phẩm -->
+        <div class="grid__row">
+            @foreach (var item in Model)
+            {
+                <div class="grid_colum_2_4 ">
+                    <a class="khung_sp" href="/details/product/@item.product_id">
+                        <div class="anh_san_pham"
+                             style="background-image :url(/Public//img/img_product/@item.product_img)"></div>
+                        <h4 class="ten_sp">@item.product_name</h4>
+                        <div class="gia">
+                            <span class="gia_giacu">SL: @item.number</span>
+                            <span class="gia_giahientai">@int.Parse(@item.product_price.ToString()).ToString("0,0") đ</span>
+                        </div>
+                        <div class="sp__tuong_tac_khach_hang">
+                            <span class="icon_tuong_tac_tim  da_tim">
+                                <!-- nếu có class tha_tim thì màu đỏ ngược lại màu trắng -->
+                                <i class="icon_chua_tim far fa-heart"></i>
+                                <i class="icon_da_tim fas fa-heart"></i>
+                            </span>
+                            <div class="icon_tuong_tac_sao">
+                                <i class="icon_sao fas fa-star  da_danh_gia_sao"></i>
+                                <i class="icon_sao fas fa-star  da_danh_gia_sao"></i>
+                                <i class="icon_sao fas fa-star  da_danh_gia_sao"></i>
+                                <i class="icon_sao fas fa-star  da_danh_gia_sao"></i>
+                                <i class="icon_sao fas fa-star  "></i>
+                            </div>
+                        </div>
+                        <div class="thuonghieu_diachishop">
+                            <span class="thuonghieu">@item.trademark</span>
+                            <span class="diachishop">@item.origin</span>
+                        </div>
+                    </a>
+                </div>
+            }
+            <!--end phần load sản phẩm -->
+
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Tạo Danh Mục";
+    Layout = "~/Areas/Admin/Views/Shared/Layout/Admin_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <h2 class="tieu_de">Create Category</h2>
+        <div id="tbdung" class="tb_tong alert alert-success" role="alert">
+
+        </div>
+        <div id="tbsai" class="tb_tong alert alert-danger" role="alert">
+
+        </div>
+        <div class="row g-3">
+            <div class="col-12">
+                <label for="inputAddress" class="category_chu form-label">Category Name</label>
+                <input onfocus="an()" type="text" class="category_form form-control" id="category_name" placeholder="Category Name">
+            </div>
+            <label id="name_tb" class="category_tb"></label>
+            <div class="col-12">
+                <label for="inputAddress" class="category_chu form-label">Ngày Tạo</label>
+                <input onfocus="an()" value="@DateTime.Now.Date.ToString()" TextMode="DateTime" class="category_form form-control" id="category_date">
+            </div>
+            <label id="date_tb" class="category_tb"></label>
+            <div class="col-12">
+                <button onclick="add_category()" class="btn_them_category btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section script
+    {
+    <script src="~/Areas/Admin/Public/js/admin_category.js"></script>
+}

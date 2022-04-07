@@ -1,0 +1,46 @@
+﻿@model List<PhuDD4_MorckProject.Models.don_dat_hang>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/MyLayout/Home_Layout.cshtml";
+}
+
+<div style="font-size:18px;margin:40px 0" ; class="container">
+    <h1 style="text-align:center;margin:20px 0 40px 0;font-size:30px">Danh Sách Đơn Hàng Của Bạn</h1>
+    <div class="ds_donhang">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Mã Đơn Hàng</th>
+                    <th scope="col">Thành Tiền</th>
+                    <th scope="col">Ngày Đặt Hàng</th>
+                    <th style="text-align:center" scope="col">Trạng Thái</th>
+                    <th style="text-align: center;" scope="col">Chi Tiết</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr style=" height: 80px; vertical-align: middle; border-bottom: 1px solid #fd5f32;">
+                        <th scope="row">#@item.order_id</th>
+                        <td>@item.total_price.ToString("0,0") VNĐ</td>
+                        <td>@item.date_order</td>
+                        @if (item.status == true)
+                        {
+                            <td style="text-align:center"><span class="badge rounded-pill bg-primary">Đã Duyệt</span></td>
+                        }
+                        else
+                        {
+                            <td style="text-align:center"><span class="badge rounded-pill bg-danger">Chưa Duyệt</span></td>
+                        }
+                        <td style="text-align: center;">
+                            <a href="~/detailsorder/@item.order_id">
+                                <i style="font-size: 24px;" class="iconmat fas fa-eye"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

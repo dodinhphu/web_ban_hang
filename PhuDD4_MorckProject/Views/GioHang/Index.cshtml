@@ -1,0 +1,165 @@
+﻿@model List<PhuDD4_MorckProject.Models.CartProduct>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/MyLayout/Home_Layout.cshtml";
+}
+
+@if (ViewBag.tongslsp <= 0)
+{
+    <div style="margin:auto;" class="giohangtrong">
+        <h6 style="margin:204px 0;padding:0;font-size:40px;font-family:cursive" class="txt_giohangtrong">
+            Giỏ Hà<span style="color: #f6422e">ng Trống !</span>
+        </h6>
+        <i class="fa-solid fa-face-frown"></i>
+        <div style="margin:200px 0; text-align:center;" class="dimua">
+            <a href="/">
+                <button class="btn btn_muangay_"> Mua Ngay</button>
+            </a>
+        </div>
+    </div>
+}
+else
+{
+    <div id="toanbogh" class="all_gio_hang noi_dung_load">
+        <div class="bao_quanh_cot_gio">
+            <div class="cot_gio_hang cot20tren100">
+                <h1 class="txt_anhgio">Hình Ảnh</h1>
+            </div>
+            <div class="cot_gio_hang cot40tren100">
+                <h1 class="txt_sanphamgio">Sản Phẩm</h1>
+            </div>
+            <div class="cot_gio_hang cot20tren100">
+                <h1 class="txt_dongiagio">Đơn Giá</h1>
+            </div>
+            <div class="cot_gio_hang cot15tren100">
+                <h1 class="txt_So_luong_gio">Số Lượng</h1>
+            </div>
+            <div class="cot_gio_hang cot20tren100">
+                <h1 class="txt_total">Tạm Tính</h1>
+            </div>
+            <div class="cot_gio_hang cot5tren100">
+
+            </div>
+        </div>
+        @using PhuDD4_MorckProject.Models
+        @{
+
+            customer customer = (customer)Session["customer"];
+            int tongtien = 0;
+        }
+        @foreach (var item in Model)
+        {
+
+
+            tongtien += (int)item.Product_price * (int)item.Product_number;
+            <div id="@item.Product_id.ToString()" class="check_dh_trong grid__row all_conten hang_gio_hang ">
+
+                <div id="" class="bao_quanh_tung_hang_gio">
+                    <!-- chia cot gio hang -->
+
+                    <div class="hang_gio_hang cot20tren100">
+                        <img class="phan_anh_gio_hang" src="~/Public/img/img_product/@item.Product_img" alt="">
+                    </div>
+                    <div class="hang_gio_hang hang_gio_hang ten_sp_gio_hang_ cot40tren100">
+                        <a href="/details/product/@item.Product_id" class="txt_txt_sanphamgio">@item.Product_name</a>
+                    </div>
+                    <div class="hang_gio_hang cot20tren100">
+                        @{ int price = (int)item.Product_price; }
+                        <h3 class="txt_txt_dongiagio">@price.ToString("0,0")VNĐ</h3>
+                    </div>
+                    <div class="hang_gio_hang cot15tren100">
+                        <h3 class="txt_txt_So_luong_gio">@item.Product_number SP</h3>
+                    </div>
+                    <div class="hang_gio_hang cot20tren100">
+                        @{
+                            int total = (int)item.Product_number * (int)item.Product_price;
+                        }
+                        <h3 class="phan_anh_gio_hang">@total.ToString("0,0") VNĐ</h3>
+                    </div>
+                    <div class="hang_gio_hang cot5tren100">
+                        <div class="link_xoa_hd" onclick="xoa_sp_gh('@item.cart_id', '@item.Product_id', '@total.ToString()')">
+                            <i class="icon_xoa_hoa_don fas fa-trash"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+        <div class="tt_khach_hang_mua--tong_tien">
+            <h2 id="tongtien_cart" class="txt_tong_tien">@tongtien.ToString("0,0") VNĐ</h2>
+        </div>
+        <div class="tongttkh">
+            <div class="tt_khach_hang_mua">
+                <ul class="list_danh_muc_tt_kh">
+                    <h3 class="txt_kttt_truocTT">Hãy Đãm Bảo Thông Tin Chính Xác Trước Khi Đặt Hàng </h3>
+                    <li class="tung_muc_tt_kh">
+                        <span class="txt_tt_kh">
+                            Tên Khách Hàng
+                        </span>
+                        @{
+                            string ten = @customer.last_name + " " + @customer.first_name;
+                        }
+                        <input id="txt_tenkh" value="@ten" readonly type="text" class="ip_tt_kh tenkh">
+                        <input value="@customer.username" readonly type="text" class="ip_tt_kh hide makh">
+                    </li>
+                    <li class="tung_muc_tt_kh">
+                        <span class="txt_tt_kh">
+                            Địa Chỉ Giao Hàng
+                        </span>
+                        <input id="txt_diachi" value="@customer.address" readonly type="text" class="ip_tt_kh diachikhachhang">
+                    </li>
+                    <li class="tung_muc_tt_kh">
+                        <span class="txt_tt_kh">
+                            Số Điện Thoại Người Nhận
+                        </span>
+                        <input id="txt_phone" value="@customer.number_phone" readonly type="text" class="ip_tt_kh sodienthoai">
+                    </li>
+                    <li style="text-align:end;" class="suatt">
+                        <a href="/authentication/register/update"><button style="padding: 20px; background: #f66448;color:#fff" type="button" class=" btn btn-info">Chỉnh Sửa</button></a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="btn_gioi_hang">
+            <a href="/home" class="gh_btn gio_hang_mua">Tiếp Tục Mua Hàng</a>
+            <div id="btn_dathang"onclick="dathang_new('@customer.username',@tongtien)" class="gh_btn gio_hang_mua  dat_hang">Đặt Hàng</div>
+        </div>
+    </div>
+
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+        </symbol>
+        <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+        </symbol>
+        <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+        </symbol>
+    </svg>
+    <div id="tongtb">
+        <div style="position:absolute;font-size:24px;bottom:0;right:10px;padding:18px" class=" alert alert-success d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill" /></svg>
+            <div id="noidungtb">
+
+            </div>
+        </div>
+    </div>
+    <div id="tongtbs">
+        <div  style="position:absolute;font-size:24px;bottom:0;right:10px;padding:18px" class="alert alert-danger d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill" /></svg>
+            <div id="txt_tbs">
+               
+            </div>
+        </div>
+    </div>
+
+
+}
+@section script
+{
+    <script src="~/Public/js/cart.js"></script>
+}

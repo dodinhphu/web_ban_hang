@@ -1,0 +1,109 @@
+﻿@model List<PhuDD4_MorckProject.Models.category>
+@{
+    ViewBag.Title = "Thêm Sản Phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/Layout/Admin_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <h2 class="tieu_de">Create Product</h2>
+        <div id="tb_tc" class="tb_tong alert alert-success" role="alert">
+        </div>
+        <div id="tb_tb" class="tb_tong alert alert-danger" role="alert">
+        </div>
+        <div class="row g-3">
+            <div class="col-12">
+                <label for="inputAddress" class="category_chu form-label">Tên Sản Phẩm</label>
+                <input onclick="an()" type="text" class="category_form form-control" id="product_name" placeholder="Tên Sản Phẩm">
+            </div>
+            <label id="tb_product_name" class="category_tb">tb</label>
+
+            <div class="row g-3">
+                <label for="inputAddress" class="category_chu form-label">Danh Mục</label>
+                <select onclick="an()" id="category_id" class="category_form form-select" aria-label="Default select example">
+                    <option value="FALSE" selected>Chọn Danh Mục</option>
+
+                    @foreach (PhuDD4_MorckProject.Models.category item in Model)
+                    {
+                        <option value="@item.category_id">@item.category_name</option>
+                    }
+                </select>
+            </div>
+            <label id="tb_category_danhmuc" class="category_tb">tb</label>
+
+            <div class="row g-3">
+                <div class="col-12">
+                    <label for="inputAddress" class="category_chu form-label">Giá</label>
+                    <input onclick="an()" type="number" class="category_form form-control" id="product_price" placeholder="Giá">
+                </div>
+                <label id="tb_product_gia" class="category_tb">tb</label>
+
+                <div class="col-12">
+                    <label for="inputAddress" class="category_chu form-label">Số Lượng</label>
+                    <input onclick="an()" type="number" class="category_form form-control" id="product_number" placeholder="Số Lượng">
+                </div>
+                <label id="tb_product_soluong" class="category_tb">tb</label>
+
+                <div class="col-12">
+                    <label for="inputAddress" class="category_chu form-label">Xuất Xứ</label>
+                    <input onclick="an()" type="text" class="category_form form-control" id="product_xuatxu" placeholder="Xuất Xứ">
+                </div>
+                <label id="tb_product_xuatxu" class="category_tb">tb</label>
+
+                <div class="col-12">
+                    <label for="inputAddress" class="category_chu form-label">Thương Hiệu</label>
+                    <input onclick="an()" type="text" class="category_form form-control" id="product_thuonghieu" placeholder="Thương Hiệu">
+                </div>
+                <label id="tb_product_thuonghieu" class="category_tb">tb</label>
+
+                <div class="col-12">
+                    <label for="inputAddress" class="category_chu form-label">Ngày Tạo</label>
+                    @{
+                        string thang = DateTime.Now.Month.ToString();
+                        string ngay = DateTime.Now.Day.ToString();
+                        if (int.Parse(thang) < 10)
+                        {
+                            thang = "0" + thang;
+                        }
+                        if (int.Parse(ngay) < 10)
+                        {
+                            ngay = "0" + ngay;
+                        }
+                        string ngay_ = DateTime.Now.Date.Year.ToString() + "-" + thang + "-" + ngay;
+                    }
+                    <input value=@ngay_ onclick="an()" type="date" class="category_form form-control" id="product_ngaytao">
+                </div>
+                <label id="tb_product_date" class="category_tb">tb</label>
+
+                <div class="mb-3">
+                    <label for="formFile" class="category_chu form-label">Ảnh Sản Phẩm</label>
+                    <input onclick="an()" class="category_form form-control" type="file" id="product_img">
+                </div>
+                <label id="tb_img" class="category_tb"></label>
+
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="category_chu form-label">Mô Tả Ngắn</label>
+                    <textarea onclick="an()" class="category_form form-control" id="product_short_description" rows="3" placeholder="Mô Tả Ngắn"></textarea>
+                </div>
+                <label id="tb_product_motangan" class="category_tb">tb</label>
+
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="category_chu form-label">Mô Tả</label>
+                    <textarea onclick="an()" class="category_form form-control" id="product_description" rows="3" placeholder="Mô Tả"></textarea>
+                </div>
+                <label id="tb_product_mota" class="category_tb">tb</label>
+                <div class="col-12">
+
+                    <button onclick="add_product()" class="btn_them_category btn btn-primary">Add</button>
+                    <button onclick="trove()" type="button" class="btn_them_category btn btn-danger">Hủy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section script
+    {
+        <script src="~/Areas/Admin/Public/js/admin_product.js"></script>
+    }
+
+

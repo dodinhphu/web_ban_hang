@@ -1,0 +1,57 @@
+﻿@model List<PhuDD4_MorckProject.Models.don_dat_hang>
+@{
+    ViewBag.Title = "ListCart";
+    Layout = "~/Areas/Admin/Views/Shared/Layout/Admin_Layout.cshtml";
+}
+
+<div style="margin:40px 0">
+    <h1 style="text-align:center;font-size:30px;margin:20px 0 40px 0">Tất Cả Đơn Hàng</h1>
+    <table class="table">
+        <thead>
+            <tr style="border-bottom: 8px solid #fd5f32;">
+                <th style="text-align:center;" scope="col">ID</th>
+                <th style="text-align:center;" scope="col">Tên Khách Hàng</th>
+                <th style="text-align:center;" scope="col">Địa Chỉ</th>
+                <th style="text-align:center;" scope="col">Số Điện Thoại</th>
+                <th style="text-align:center;" scope="col">Ngày Đặt</th>
+                <th style="text-align:center;" scope="col">Tổng Tiền</th>
+                <th style="text-align:center;" scope="col">Trạng Thái</th>
+                <th style="text-align:center;" scope="col">Chi Tiết</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr style="height: 80px; vertical-align: middle; border-bottom: 1px solid #fd5f32;">
+                    <th scope="row">#@item.order_id</th>
+                    <td>@item.customer_name</td>
+                    <td>@item.customer_address</td>
+                    <td>@item.customer_phone</td>
+                    <td>@item.date_order.ToString().Split(' ')[0]</td>
+                    <td>@item.total_price.ToString("0,0") VNĐ</td>
+                    @if (item.status == false)
+                    {
+                        <td style="text-align:center">
+                            <button  id="@item.order_id@item.customer_id" onclick="doi_status('@item.order_id', '@item.customer_id')" style="margin:0;padding:0;font-size:16px;border-radius:30px" type="button" class="btn btn-primary">Xử Lí</button>
+                        </td>
+                    }
+                    else
+                    {
+                        <td style="text-align:center">
+                            <button id="@item.order_id@item.customer_id" onclick="doi_status('@item.order_id', '@item.customer_id')" style="margin:0;padding:0;font-size:16px;border-radius:30px" type="button" class="btn btn-danger">Hủy Đơn</button>
+                        </td>
+                    }
+                    <td style="text-align: center;">
+                        <a href="~/Admin/order/details/@item.order_id">
+                            <i style="font-size: 20px;" class="iconmat fas fa-eye"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section script
+{
+    <script src="~/Public/js/order.js"></script>
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a7ce654f9bd84cb385a3714bda74a8ba" Name="Diagram1">
+        <EntityTypeShape EntityType="MockProjectModel.cart" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MockProjectModel.category" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MockProjectModel.customer" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MockProjectModel.don_dat_hang" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MockProjectModel.don_hang_chitiet" Width="1.5" PointX="7.5" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MockProjectModel.product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="MockProjectModel.FK__cart__cart_id__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="MockProjectModel.FK__cart__product_id__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="MockProjectModel.FK__product__categor__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="MockProjectModel.FK__don_dat_h__custo__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="MockProjectModel.FK__don_hang___order__60A75C0F" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

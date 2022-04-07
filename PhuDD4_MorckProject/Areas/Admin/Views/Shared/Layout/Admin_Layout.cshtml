@@ -1,0 +1,178 @@
+﻿
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <link href="~/Public/icon/icon_code_web/fontawesome-free-5.15.3-web/css/all.min.css" rel="stylesheet" />
+    <link href="~/Public/icon/fontawesome-free-6.0.0-web/css/all.min.css" rel="stylesheet" />
+    <!-- forn chữ-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;700&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link href="~/Public/css/admin.css" rel="stylesheet" />
+    <link href="~/Public/Bootrap Jquery/bootstrap-file/css/bootstrap.min.css" rel="stylesheet" />
+
+    <title></title>
+</head>
+<body>
+    <div class="app">
+        <!-- phần đầu trang -->
+        <header class="PhanDauTrangAdmin">
+          
+            <h1 class="chao">Trang Quảng Trị WebSite</h1>
+        </header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul id="ulbt_" class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link " aria-current="page" href="~/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " aria-current="page" href="@Url.Action("listProduct","product")">Product</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("listCategory","Category")">Category</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("listCart","Cart")">Order</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- phần Nội dung -->
+        <div class="PhanNoiDungTrangAdmin">
+            <div class="grid">
+                <!-- độ dài 1200px -->
+                @RenderBody()
+            </div>
+        </div>
+
+        <!-- phần foodter -->
+        <footer class="cuoi_web">
+            <!-- phần cuôi web __ footer-->
+            <div class="grid">
+                <div class="grid__row">
+                    <!-- phần  danh sách-->
+                    <div class="grid_colum_2_4">
+                        <h3 class="name_cot_footer">Chăm Sóc Khách Hàng</h3>
+                        <ul class="list_tung_cot_footer">
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Trung Tâm Hổ Trợ</a>
+                            </li>
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Store Mall</a>
+                            </li>
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Hướng Dẩn Mua Hàng</a>
+                            </li>
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Trung Tâm Hổ Trợ</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid_colum_2_4">
+                        <h3 class="name_cot_footer">Giới Thiệu</h3>
+                        <ul class="list_tung_cot_footer">
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Giới Thiệu</a>
+                            </li>
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Tuyển Dụng</a>
+                            </li>
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Điều Khoản</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid_colum_2_4">
+                        <h3 class="name_cot_footer">Mẹo Vặt</h3>
+                        <ul class="list_tung_cot_footer">
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Flash Sales</a>
+                            </li>
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Giao Hàng</a>
+                            </li>
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Kênh Người Bán</a>
+                            </li>
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Chương Trình Tiếp Thị Liên Kết Shopee</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid_colum_2_4">
+                        <h3 class="name_cot_footer">Theo Giõi</h3>
+                        <ul class="list_tung_cot_footer">
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer rieng_cot3" href="">
+                                    <i class="icon_item_footer fab fa-facebook"></i>
+                                    Facebook
+                                </a>
+                            </li>
+                            <li class="list_tung_cot_item ">
+                                <a class="link_item_footer rieng_cot3" href="">
+                                    <i class="icon_item_footer fab fa-instagram-square"></i>
+                                    Instagram
+                                </a>
+                            </li>
+                            <li class="list_tung_cot_item ">
+                                <a class="link_item_footer rieng_cot3" href="">
+                                    <i class="icon_item_footer fab fa-twitter-square"></i>
+                                    Twitter
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid_colum_2_4">
+                        <h3 class="name_cot_footer">Thanh Toán</h3>
+                        <ul class="list_tung_cot_footer">
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Viettel Pay</a>
+                            </li>
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Zalo Pay</a>
+                            </li>
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">Shopee Pay</a>
+                            </li>
+                            <li class="list_tung_cot_item">
+                                <a class="link_item_footer" href="">ATM Visa</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="phan_cuoi_cua_footer">
+                <div class="grid">
+                    <div class="grid__row">
+                        <div class="grid_colum_4cot">
+                            <a class="link_cuoi_footer" href="###">CHÍNH SÁCH BẢO MẬT</a>
+                        </div>
+                        <div class="grid_colum_4cot">
+                            <a class="link_cuoi_footer" href="###">QUY CHẾ HOẠT ĐỘNG</>
+                        </div>
+                        <div class="grid_colum_4cot">
+                            <a class="link_cuoi_footer" href="###">CHÍNH SÁCH VẬN CHUYỂN</a>
+                        </div>
+                        <div class="grid_colum_4cot">
+                            <a class="link_cuoi_footer" href="###">CHÍNH SÁCH TRẢ HÀNG VÀ HOÀN TIỀN</a>
+                        </div>
+                    </div>
+                    <p class="ten_ban_quyen">© 2021 Đình Phú Design. Tất cả các quyền được bảo lưu.</p>
+                </div>
+            </div>
+        </footer>
+
+        <script src="~/Public/Bootrap Jquery/Jquery/jquery.js"></script>
+        <script src="~/Public/Bootrap Jquery/bootstrap-file/js/bootstrap.js"></script>
+        @RenderSection("script", required: false)
+    </div>
+</body>
+</html>
